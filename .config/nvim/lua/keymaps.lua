@@ -82,6 +82,7 @@ M.init = function()
     utils.keys.nmap("<leader>lc", function() vim.cmd("lclose") end, "Close the location window")
     utils.keys.nmap("<C-W>M", "<C-W>|<C-W>)", "[M]aximize the current buffer")
     utils.keys.nnoremap("<leader>w", function(args) require("winshift").cmd_winshift(args) end, "Start window movement")
+    -- }}}
 end
 
 M.lsp = function(buffer)
@@ -101,7 +102,6 @@ M.lsp = function(buffer)
     utils.keys.nnoremap("gfd", vim.lsp.buf.declaration,
         { buffer = buffer, desc = "Goto declaration (in current window)" })
     utils.keys.nnoremap("gd", vim.lsp.buf.declaration, { buffer = buffer, desc = "Goto declaration (in current window)" })
-    -- }}}
 
     utils.keys.nnoremap("gvD", ":vsplit | :lua vim.lsp.buf.definition()<CR>",
         { buffer = buffer, desc = "Goto definition (in vsplit)" })

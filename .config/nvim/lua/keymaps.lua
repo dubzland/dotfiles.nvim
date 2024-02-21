@@ -1,5 +1,4 @@
 local utils = require("utils")
-local silent = { silent = true, noremap = true }
 
 local M = {}
 
@@ -12,6 +11,12 @@ M.init = function()
     utils.keys.nnoremap("<C-l>", "<C-w>l", "Move cursor one buffer to the right")
     -- }}}
 
+    -- {{{ tmux
+    utils.keys.nnoremap("<leader>ss", require("tmux-sessions").tmux_session_switch)
+    utils.keys.nnoremap("<leader>sn", require("tmux-sessions").tmux_session_new)
+    -- }}}
+
+    -- {{{ Search
     utils.keys.nnoremap("<leader><space>", function()
         vim.cmd("noh")
         vim.fn.clearmatches()
@@ -20,6 +25,7 @@ M.init = function()
     -- make search very magical
     utils.keys.nnoremap("/", "/\\v")
     utils.keys.vnoremap("/", "/\\v")
+    -- }}}
 
     -- Trouble {{{
     if utils.is_available("trouble") then
@@ -80,8 +86,9 @@ end
 
 M.lsp = function(buffer)
     -- {{{ Diagnostics
-    utils.keys.nnoremap("<leader>e", vim.diagnostic.setloclist,
+    utils.keys.nnoremap("<leader>el", vim.diagnostic.setloclist,
         { buffer = buffer, desc = "Display document diagnostics in location window" })
+    utils.keys.nnoremap("<leader>ek", vim.diagnostic.get, "Show diagnostic in popup")
     utils.keys.nnoremap("[g", vim.diagnostic.goto_prev, { buffer = buffer, desc = "Move to the previous diagnostic" })
     utils.keys.nnoremap("]g", vim.diagnostic.goto_next, { buffer = buffer, desc = "Move to the next diagnostic" })
     -- }}}
@@ -110,6 +117,7 @@ M.lsp = function(buffer)
         { buffer = buffer, desc = "Goto implementation (in current window)" })
     -- }}}
 
+    -- {{{ LSP
     utils.keys.nnoremap("gr", vim.lsp.buf.references, { buffer = buffer, desc = "Display references in quickfix" })
 
     utils.keys.nnoremap("K", vim.lsp.buf.hover,
@@ -117,19 +125,20 @@ M.lsp = function(buffer)
     utils.keys.nnoremap("<leader>k", vim.lsp.buf.signature_help,
         { buffer = buffer, desc = "Display signature help in popup" })
     utils.keys.nnoremap("<leader>ca", vim.lsp.buf.code_action, { buffer = buffer, desc = "Show current code actions" })
+    -- }}}
 
+    -- {{{ Telescope
     local ok, telescope = pcall(require, "telescope.builtin")
     if ok then
         utils.keys.nnoremap("<leader>r", telescope.lsp_references,
             { buffer = buffer, desc = "Telescope - Display references in buffer" })
     end
+    -- }}}
 end
 
 M.nvim_cmp = function(cmp, luasnip)
     return {
-        -- ["<C-p>"] = cmp.mapping.select_prev_item(),
-        -- ["<C-n>"] = cmp.mapping.select_next_item(),
-        -- Add tab support
+        -- {{{ TAB completion
         -- ["<Tab>"] = cmp.mapping(function(fallback)
         --	if cmp.visible() then
         --		cmp.select_next_item()
@@ -150,6 +159,8 @@ M.nvim_cmp = function(cmp, luasnip)
         --		fallback()
         --	end
         -- end, { "i", "s" }),
+        -- }}}
+        -- {{{ NON-TAB completion
         ["<C-d>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-e>"] = cmp.mapping.close(),
@@ -164,6 +175,7 @@ M.nvim_cmp = function(cmp, luasnip)
         ["<S-Tab>"] = cmp.mapping(function()
             luasnip.jump(-1)
         end),
+        -- }}}
     }
 end
 
@@ -209,5 +221,4 @@ end
 
 return M
 
--- vim: foldmethod=marker
 -- vim: foldmethod=marker

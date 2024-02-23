@@ -3,6 +3,7 @@ local utils = require("dubzland.utils")
 local neotest_config = {}
 
 neotest_config.init = function(opts)
+    opts = opts or {}
     local nt = require("neotest")
 
     nt.setup(utils.merge({

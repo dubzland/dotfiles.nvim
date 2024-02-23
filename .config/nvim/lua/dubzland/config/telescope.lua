@@ -3,6 +3,7 @@ local utils = require("dubzland.utils")
 local telescope_config = {}
 
 telescope_config.init = function(opts)
+    opts = opts or {}
     require("telescope").setup(utils.merge({
             pickers = {
                 live_grep = {

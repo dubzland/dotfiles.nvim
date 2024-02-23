@@ -3,6 +3,7 @@ local utils = require("dubzland.utils")
 local nvim_cmp_config = {}
 
 nvim_cmp_config.init = function(opts)
+    opts = opts or {}
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 

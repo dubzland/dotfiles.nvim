@@ -1,26 +1,11 @@
 vim.g.mapleader = [[,]]
 vim.g.maplocalleader = [[,]]
 
--- {{{ Initialize lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
-    spec = "dubzland.plugins",
-    change_detection = { notify = false }
-})
--- }}}
-
-require("dubzland.statusline").init({ excluded = { "NvimTree" } })
+require("dubzland.plugins").init(function()
+    require("dubzland.statusline").init({ excluded = { "NvimTree" } })
+    require("dubzland.options").init()
+    require("dubzland.autocmds").init()
+    require("dubzland.keymaps").init()
+end)
 
 -- vim: foldmethod=marker:

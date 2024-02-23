@@ -3,6 +3,7 @@ local utils = require("dubzland.utils")
 local treesitter_config = {}
 
 treesitter_config.init = function(opts)
+    opts = opts or {}
     require("nvim-treesitter.configs").setup(utils.merge({
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = {

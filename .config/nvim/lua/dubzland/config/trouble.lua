@@ -3,6 +3,7 @@ local utils = require("dubzland.utils")
 local trouble_config = {}
 
 trouble_config.init = function(opts)
+    opts = opts or {}
     local trouble = require("trouble")
 
     trouble.setup(opts)

@@ -3,6 +3,7 @@ local utils = require("dubzland.utils")
 local mason_lsp_config = {}
 
 mason_lsp_config.init = function(opts)
+    opts = opts or {}
     local ensure_installed = {
         "bashls",
         "clangd",

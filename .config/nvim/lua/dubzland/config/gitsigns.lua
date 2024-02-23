@@ -3,6 +3,7 @@ local utils = require("dubzland.utils")
 local gitsigns_config = {}
 
 gitsigns_config.init = function(opts)
+    opts = opts or {}
     require("gitsigns").setup(utils.merge({
         signs = {
             add = { text = "+" },

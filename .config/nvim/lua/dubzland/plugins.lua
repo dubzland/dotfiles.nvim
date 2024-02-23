@@ -41,13 +41,13 @@ plugins.init_paq = function(on_complete)
         'akinsho/bufferline.nvim',
         'lewis6991/gitsigns.nvim',
         'lukas-reineke/indent-blankline.nvim',
-        { 'nvim-treesitter/nvim-treesitter', { ['build'] = ':TSUpdate' } },
+        { 'nvim-treesitter/nvim-treesitter', { build = ':TSUpdate' } },
         'nvim-treesitter/nvim-treesitter-textobjects',
         -- }}}
 
         -- {{{ diagnostics/notifications
         'folke/trouble.nvim',
-        { 'j-hui/fidget.nvim',               { ['tag'] = 'v1.4.0' } },
+        { 'j-hui/fidget.nvim',               { tag = 'v1.4.0' } },
         -- }}}
 
         -- {{{ LSP
@@ -67,7 +67,7 @@ plugins.init_paq = function(on_complete)
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-cmdline',
         'hrsh7th/cmp-nvim-lsp-signature-help',
-        { 'L3MON4D3/LuaSnip',              { ['tag'] = 'v2.*', ['build'] = 'make install_jsregexp' } },
+        { 'L3MON4D3/LuaSnip',              { tag = 'v2.*', build = 'make install_jsregexp' } },
         'saadparwaiz1/cmp_luasnip',
         -- }}}
 
@@ -84,7 +84,7 @@ plugins.init_paq = function(on_complete)
 
         'folke/neodev.nvim',
 
-        { 'nvim-telescope/telescope.nvim', { ['tag'] = '0.1.5' } },
+        { 'nvim-telescope/telescope.nvim', { tag = '0.1.5' } },
         'nvim-lua/plenary.nvim',
         'BurntSushi/ripgrep',
 

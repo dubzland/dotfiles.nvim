@@ -124,3 +124,5 @@ end
 M.keys = K
 
 return M
+
+-- vim: foldmethod=marker

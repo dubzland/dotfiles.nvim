@@ -227,9 +227,9 @@ local function assign(bufnr, state)
     end
 
     if state == "active" then
-        vim.opt_local.statusline = "%!v:lua.require'statusline'.active()"
+        vim.opt_local.statusline = "%!v:lua.require'dubzland.statusline'.active()"
     else
-        vim.opt_local.statusline = "%!v:lua.require'statusline'.inactive()"
+        vim.opt_local.statusline = "%!v:lua.require'dubzland.statusline'.inactive()"
     end
 end
 
@@ -255,7 +255,7 @@ local function init(config)
     api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
         pattern = "*",
         callback = function(evt)
-            require("statusline").assign(evt.buf, "active")
+            require("dubzland.statusline").assign(evt.buf, "active")
         end,
         group = statuslineGroup,
     })
@@ -263,10 +263,22 @@ local function init(config)
     api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
         pattern = { "*" },
         callback = function(evt)
-            require("statusline").assign(evt.buf, "inactive")
+            require("dubzland.statusline").assign(evt.buf, "inactive")
         end,
         group = statuslineGroup,
     })
+
+    local colors = require("dubzland.colors").values
+
+    vim.api.nvim_set_hl(0, "StatuslineModeNormal", { fg = colors.gui04, bg = colors.gui01 })
+    vim.api.nvim_set_hl(0, "StatuslineModeInsert", { fg = colors.gui0B, bg = colors.guibg })
+    vim.api.nvim_set_hl(0, "StatuslineModeVisual", { fg = colors.gui0A, bg = colors.guibg })
+    vim.api.nvim_set_hl(0, "StatuslineModeReplace", { fg = colors.gui08, bg = colors.guibg })
+    vim.api.nvim_set_hl(0, "StatuslineModeCmdLine", { fg = colors.gui0C, bg = colors.gui02 })
+    vim.api.nvim_set_hl(0, "StatuslineModeTerminal", { fg = colors.gui00, bg = colors.gui0C })
+    vim.api.nvim_set_hl(0, "GitSymbol", { fg = colors.gui0D, bg = colors.guibg })
 end
 
 return { init = init, assign = assign, active = active, inactive = inactive }
+
+-- vim: foldmethod=marker

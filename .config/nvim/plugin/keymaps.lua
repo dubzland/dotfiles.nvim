@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("dubzland.utils")
 
 utils.keys.nnoremap("<leader>pv", vim.cmd.Ex)
 -- {{{ Movement
@@ -21,7 +21,7 @@ utils.keys.vnoremap("/", "/\\v")
 -- }}}
 
 -- {{{ Window manipulation
-utils.keys.nnoremap("<leader>q", require("utils").delete_buffer_keep_window,
+utils.keys.nnoremap("<leader>q", utils.delete_buffer_keep_window,
     "Close the current buffer, but keep the window open")
 utils.keys.nmap("<leader>wco", function() vim.cmd("copen") end, "Open the quickfix window")
 utils.keys.nmap("<leader>wcc", function() vim.cmd("cclose") end, "Close the quickfix window")

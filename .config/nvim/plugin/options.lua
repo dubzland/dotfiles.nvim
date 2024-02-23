@@ -20,7 +20,6 @@ opt.shiftround = true
 opt.title = true
 opt.linebreak = true
 opt.colorcolumn = "+1"
--- opt.termguicolors = true
 -- }}}
 
 -- {{{ Tabs
@@ -66,8 +65,6 @@ opt.wildignore = {
 }
 -- }}}
 
-opt.termguicolors = true
-
 -- Avoid showing extra messages when using completion
 opt.shortmess = vim.opt.shortmess + "c"
 
@@ -75,5 +72,27 @@ vim.g.python3_host_prog = "~/.local/share/nvim/venv/bin/python"
 vim.g.loaded_perl_provider = 0
 
 -- vim.wo.foldlevel = 1
+
+vim.o.completeopt = "menuone,noinsert,noselect"
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	border = "single",
+})
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	border = "single",
+})
+
+vim.diagnostic.config({
+	-- update_in_insert = true,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+	},
+})
 
 -- vim: set sts=4 sw=4 ts=4 noet foldmethod=marker:

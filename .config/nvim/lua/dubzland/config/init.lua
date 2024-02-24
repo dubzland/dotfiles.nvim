@@ -12,13 +12,15 @@ M.init = function()
     require("dubzland.config.mason-lspconfig").init()
     require("dubzland.config.mason-null-ls").init()
     require("dubzland.config.neotest").init()
+    require("dubzland.config.netrw").init()
     require("dubzland.config.nvim-cmp").init()
-    require("dubzland.config.nvim-tree").init()
+    -- require("dubzland.config.nvim-tree").init()
     require("dubzland.config.telescope").init()
     require("dubzland.config.treesitter").init()
     require("dubzland.config.trouble").init()
     require("dubzland.config.vim-fugitive").init()
     require("dubzland.config.winshift").init()
+    require("dubzland.config.dubzline").init()
 end
 
 return M

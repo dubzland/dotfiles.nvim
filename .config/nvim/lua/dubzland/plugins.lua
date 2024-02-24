@@ -43,6 +43,7 @@ plugins.init_paq = function(on_complete)
         'lukas-reineke/indent-blankline.nvim',
         { 'nvim-treesitter/nvim-treesitter', { build = ':TSUpdate' } },
         'nvim-treesitter/nvim-treesitter-textobjects',
+        'dubzland/dubzline.nvim',
         -- }}}
 
         -- {{{ diagnostics/notifications
@@ -88,8 +89,9 @@ plugins.init_paq = function(on_complete)
         'nvim-lua/plenary.nvim',
         'BurntSushi/ripgrep',
 
+        'prichrd/netrw.nvim',
         'nvim-tree/nvim-tree.lua',
-        'nvim-tree/nvim-web-devicons',
+        -- 'nvim-tree/nvim-web-devicons',
 
         -- {{{ build/testing
         'nvim-neotest/neotest',

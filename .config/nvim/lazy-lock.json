@@ -35,6 +35,7 @@
   "ripgrep": { "branch": "master", "commit": "6ebebb2aaa9991694aed10b944cf2e8196811e1c" },
   "telescope.nvim": { "branch": "master", "commit": "d90956833d7c27e73c621a61f20b29fdb7122709" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
+  "undotree": { "branch": "master", "commit": "9dbbf3b7d19dda0d22ceca461818e4739ad8154d" },
   "vim-commentary": { "branch": "master", "commit": "f67e3e67ea516755005e6cccb178bc8439c6d402" },
   "vim-dispatch": { "branch": "master", "commit": "4c695bc052cad2ae6b980aebbe48d046466e27ae" },
   "vim-dispatch-neovim": { "branch": "master", "commit": "c8c4e21a95c25032a041002f9bf6e45a75a73021" },

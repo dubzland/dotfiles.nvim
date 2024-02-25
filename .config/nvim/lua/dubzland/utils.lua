@@ -4,46 +4,38 @@ local M = {}
 
 local error_modified = "E89: no write since last change"
 
--- Borrowed shamelessly from: https://github.com/terrortylor/neovim-environment/blob/main/lua/ui/window/init.lua
 function M.delete_buffer_keep_window()
-    if api.nvim_buf_get_option(0, "modified") then
+    local buf_to_delete = api.nvim_get_current_buf()
+
+    -- If the buffer is modified, prevent delete
+    if api.nvim_get_option_value("modified", { buf = buf_to_delete }) then
         print(error_modified)
-    else
-        local cur_win = api.nvim_get_current_win()
-        local buf_to_delete = api.nvim_get_current_buf()
-
-        local windows = vim.api.nvim_list_wins()
-        for _, win in pairs(windows) do
-            M.change_buffer(win, buf_to_delete)
-        end
-
-        api.nvim_set_current_win(cur_win)
-        api.nvim_command("bdelete " .. buf_to_delete)
+        return
     end
-end
 
-function M.get_buf_id(file)
-    local buf = api.nvim_call_function("bufnr", { file })
-    return buf
-end
+    -- Find a valid buffer to switch to
+    local alt_id = 0
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf) then
+            alt_id = buf
+            break
+        end
+    end
 
-function M.change_buffer(window, buf_to_delete)
-    api.nvim_set_current_win(window)
-
-    if api.nvim_win_get_buf(window) == buf_to_delete then
-        local alt_id = api.nvim_call_function("bufnr", { "#" })
-
-        if alt_id > 0 and api.nvim_buf_is_loaded(alt_id) then
-            api.nvim_command("buffer #")
-        else
-            api.nvim_command("bnext")
-            -- bnext can not do anything, so this checks if buffer is still the same
-            -- and if so then just create a new buf
-            if api.nvim_win_get_buf(window) == buf_to_delete then
-                api.nvim_command("enew")
+    -- Remove this buffer from any open windows
+    local windows = vim.api.nvim_list_wins()
+    for _, win in pairs(windows) do
+        if api.nvim_win_get_buf(win) == buf_to_delete then
+            if alt_id > 0 then
+                api.nvim_win_set_buf(win, alt_id)
+            else
+                api.nvim_win_call(win, function() api.nvim_command("enew") end)
             end
         end
     end
+
+    -- actually delete the buffer
+    api.nvim_buf_delete(buf_to_delete, {})
 end
 
 function M.reload_cargo_workspace()

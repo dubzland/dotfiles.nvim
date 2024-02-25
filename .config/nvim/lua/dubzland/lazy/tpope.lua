@@ -1,8 +1,8 @@
 return {
     {
         'tpope/vim-fugitive',
-        config = function(_, opts)
-            require("dubzland.config.vim-fugitive").init(opts)
+        config = function()
+            require("dubzland.config.vim-fugitive").init()
         end,
     },
     'tpope/vim-commentary',

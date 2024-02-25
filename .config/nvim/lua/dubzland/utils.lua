@@ -75,15 +75,28 @@ function K.opts_or_default(opts)
     return opts
 end
 
-local K = {}
-
 function K.map(mode, lhs, rhs, opts)
-    opts = M.opts_or_default(opts)
-    vim.keymap.set(mode, lhs, rhs, M.merge(opts, { silent = true }))
+    opts = K.opts_or_default(opts)
+    if type(mode) == "string" then
+        vim.keymap.set(mode, lhs, rhs, M.merge(opts, { silent = true }))
+    else
+        for _, m in ipairs(mode) do
+            K.map(m, lhs, rhs, opts)
+        end
+    end
 end
 
 function K.map_prefix(prefix, mode, lhs, rhs, opts)
     K.map(mode, prefix .. lhs, rhs, opts)
+end
+
+function K.noremap(mode, lhs, rhs, opts)
+    opts = K.opts_or_default(opts)
+    K.map(mode, lhs, rhs, M.merge(opts, { noremap = true }))
+end
+
+function K.noremap_prefix(prefix, mode, lhs, rhs, opts)
+    K.noremap(mode, prefix .. lhs, rhs, opts)
 end
 
 function K.nmap(lhs, rhs, opts)
@@ -95,7 +108,7 @@ function K.nmap_prefix(prefix, lhs, rhs, opts)
 end
 
 function K.nnoremap(lhs, rhs, opts)
-    K.map("n", lhs, rhs, M.merge(M.opts_or_default(opts), { noremap = true }))
+    K.map("n", lhs, rhs, M.merge(K.opts_or_default(opts), { noremap = true }))
 end
 
 function K.nnoremap_prefix(prefix, lhs, rhs, opts)
@@ -103,11 +116,19 @@ function K.nnoremap_prefix(prefix, lhs, rhs, opts)
 end
 
 function K.vnoremap(lhs, rhs, opts)
-    K.map("v", lhs, rhs, M.merge(M.opts_or_default(opts), { noremap = true }))
+    K.map("v", lhs, rhs, M.merge(K.opts_or_default(opts), { noremap = true }))
 end
 
 function K.vnoremap_prefix(prefix, lhs, rhs, opts)
     K.vnoremap(prefix .. lhs, rhs, opts)
+end
+
+function K.xnoremap(lhs, rhs, opts)
+    K.map("x", lhs, rhs, M.merge(K.opts_or_default(opts), { noremap = true }))
+end
+
+function K.xnoremap_prefix(prefix, lhs, rhs, opts)
+    K.xnoremap(prefix .. lhs, rhs, opts)
 end
 
 M.keys = K

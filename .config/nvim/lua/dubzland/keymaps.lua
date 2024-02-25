@@ -10,6 +10,8 @@ M.init = function()
     utils.keys.nnoremap("<C-j>", "<C-w>j", "Move cursor one buffer down")
     utils.keys.nnoremap("<C-k>", "<C-w>k", "Move cursor one buffer up")
     utils.keys.nnoremap("<C-l>", "<C-w>l", "Move cursor one buffer to the right")
+    utils.keys.vnoremap("K", ":m '<-2<CR>gv=gv", "Move selected text up one line")
+    utils.keys.vnoremap("J", ":m '>+1<CR>gv=gv", "Move selected text down one line")
     -- }}}
 
     -- {{{ Search

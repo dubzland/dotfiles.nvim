@@ -15,11 +15,10 @@ M.init = function()
     -- }}}
 
     -- {{{ File explorer
-    utils.keys.nnoremap("<leader>pv", vim.cmd.Ex)
+    utils.keys.nnoremap("<leader>fe", vim.cmd.Ex)
     -- }}}
 
     -- {{{ Movement
-    utils.keys.nnoremap("<C-h>", "<C-w>h", "Move cursor one buffer to the left")
     utils.keys.nnoremap("<C-h>", "<C-w>h", "Move cursor one buffer to the left")
     utils.keys.nnoremap("<C-j>", "<C-w>j", "Move cursor one buffer down")
     utils.keys.nnoremap("<C-k>", "<C-w>k", "Move cursor one buffer up")
@@ -33,7 +32,7 @@ M.init = function()
     utils.keys.noremap({ "n", "v" }, "<leader>y", [["+y]], "Same as y, but to the system clipboard")
     utils.keys.noremap({ "n", "v" }, "<leader>Y", [["+Y]], "Same as Y, but to the system clipboard")
 
-    utils.keys.vnoremap("<leader>p", [["_dP]], "Paste over text without losing register")
+    utils.keys.nnoremap("<leader>p", [["_ddP]], "Paste over text without losing register")
     -- }}}
 
     -- {{{ Window manipulation

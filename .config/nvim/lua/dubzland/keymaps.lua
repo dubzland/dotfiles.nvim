@@ -36,9 +36,9 @@ M.init = function()
     -- }}}
 
     -- {{{ Window manipulation
-    utils.keys.nnoremap("<leader>qk", utils.delete_buffer_keep_window,
+    utils.keys.nnoremap("<leader>qk", vim.cmd.Bdelete,
         "Close the current buffer, but keep the window open")
-    utils.keys.nnoremap("<leader>qq", function() vim.api.nvim_command("bwipeout") end,
+    utils.keys.nnoremap("<leader>qq", vim.cmd.bwipeout,
         "Close the current buffer, and close the window")
     utils.keys.nmap("<leader>wco", function() vim.cmd("copen") end, "Open the quickfix window")
     utils.keys.nmap("<leader>wcc", function() vim.cmd("cclose") end, "Close the quickfix window")

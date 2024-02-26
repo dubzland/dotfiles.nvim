@@ -2,42 +2,6 @@ local api = vim.api
 
 local M = {}
 
-local error_modified = "E89: no write since last change"
-
-function M.delete_buffer_keep_window()
-    local buf_to_delete = api.nvim_get_current_buf()
-
-    -- If the buffer is modified, prevent delete
-    if api.nvim_get_option_value("modified", { buf = buf_to_delete }) then
-        print(error_modified)
-        return
-    end
-
-    -- Find a valid buffer to switch to
-    local alt_id = 0
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.api.nvim_buf_is_loaded(buf) then
-            alt_id = buf
-            break
-        end
-    end
-
-    -- Remove this buffer from any open windows
-    local windows = vim.api.nvim_list_wins()
-    for _, win in pairs(windows) do
-        if api.nvim_win_get_buf(win) == buf_to_delete then
-            if alt_id > 0 then
-                api.nvim_win_set_buf(win, alt_id)
-            else
-                api.nvim_win_call(win, function() api.nvim_command("enew") end)
-            end
-        end
-    end
-
-    -- actually delete the buffer
-    api.nvim_buf_delete(buf_to_delete, {})
-end
-
 function M.reload_cargo_workspace()
     local clients = vim.lsp.get_active_clients()
 

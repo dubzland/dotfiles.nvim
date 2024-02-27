@@ -20,6 +20,8 @@ treesitter_config.init = function(opts)
             "vimdoc",
             "vim",
         },
+        -- 2024-02-27: Temporarily disable (completely breaks syntax)
+        ignore_install = { "markdown" },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = true,

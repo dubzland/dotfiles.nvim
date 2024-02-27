@@ -77,7 +77,7 @@ telescope_config.init = function(opts)
     local colors = require("dubzland.colors").values
 
     vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = colors.gui0E })
-    vim.api.nvim_set_hl(0, "TelescopeNormal", { fg = colors.gui06, bg = colors.gui00 })
+    -- vim.api.nvim_set_hl(0, "TelescopeNormal", { fg = colors.gui06, bg = colors.gui00 })
     vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = colors.gui01, bg = colors.gui01 })
     vim.api.nvim_set_hl(0, "TelescopeTitle", { fg = colors.gui07, bg = colors.gui02 })
 end

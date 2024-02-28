@@ -47,14 +47,14 @@ nvim_cmp_config.init = function(opts)
             }),
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
+                if luasnip.expand_or_jumpable() then
                     luasnip.jump(1)
                 else
                     fallback()
                 end
             end),
             ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
+                if luasnip.expand_or_jumpable() then
                     luasnip.jump(-1)
                 else
                     fallback()

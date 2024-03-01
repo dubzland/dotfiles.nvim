@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
+MODULE_NAME="nvim"
+
 MODULE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 STOW_DIR="$(dirname "$MODULE_DIR")"
 
+pushd $MODULE_DIR
+git submodule update --init --recursive
+popd
+
 pushd $STOW_DIR
-stow -t $HOME nvim
+stow -t $HOME "$MODULE_NAME"
 popd

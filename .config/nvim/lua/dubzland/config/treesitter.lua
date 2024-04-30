@@ -12,7 +12,6 @@ treesitter_config.init = function(opts)
             "go",
             "lua",
             "python",
-            "ron",
             "rust",
             "toml",
             "tsx",
@@ -21,12 +20,15 @@ treesitter_config.init = function(opts)
             "vim",
         },
         -- 2024-02-27: Temporarily disable (completely breaks syntax)
-        ignore_install = { "markdown" },
+        -- ignore_install = { "markdown" },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = true,
 
-        highlight = { enable = true },
+        highlight = {
+            enable = true,
+            disable = { "markdown" },
+        },
         indent = { enable = true, disable = { "python" } },
         incremental_selection = {
             enable = true,

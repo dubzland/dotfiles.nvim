@@ -11,7 +11,6 @@ mason_lsp_config.init = function(opts)
         "gopls",
         "jsonls",
         "lua_ls",
-        "marksman",
         "pyright",
         "rust_analyzer",
         "solargraph",

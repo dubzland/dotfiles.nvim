@@ -1,4 +1,5 @@
 local utils = require("dubzland.utils")
+local util = require("lspconfig/util")
 
 local mason_lsp_config = {}
 
@@ -14,9 +15,8 @@ mason_lsp_config.init = function(opts)
         "pyright",
         "rust_analyzer",
         "solargraph",
-        "taplo",
         "terraformls",
-        "tsserver",
+        "ts_ls",
     }
 
     local handlers = {

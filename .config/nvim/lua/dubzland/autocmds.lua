@@ -41,9 +41,13 @@ M.init = function()
             utils.keys.nnoremap("<leader>el", vim.diagnostic.setloclist,
                 { buffer = bufnr, desc = "Display document diagnostics in location window" })
             utils.keys.nnoremap("<leader>ek", vim.diagnostic.open_float, "Show diagnostic in popup")
-            utils.keys.nnoremap("[d", vim.diagnostic.goto_prev,
+            utils.keys.nnoremap("[d", function()
+                    vim.diagnostic.jump({ count = -1 })
+                end,
                 { buffer = bufnr, desc = "Move to the previous diagnostic" })
-            utils.keys.nnoremap("]d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Move to the next diagnostic" })
+            utils.keys.nnoremap("]d", function()
+                vim.diagnostic.jump({ count = 1 })
+            end, { buffer = bufnr, desc = "Move to the next diagnostic" })
             -- }}}
 
             -- {{{ Token navigation
@@ -66,9 +70,13 @@ M.init = function()
             -- {{{ LSP
             utils.keys.nnoremap("gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Display references in quickfix" })
 
-            utils.keys.nnoremap("K", vim.lsp.buf.hover,
+            utils.keys.nnoremap("K", function()
+                    vim.lsp.buf.hover({ border = 'single' })
+                end,
                 { buffer = bufnr, desc = "Display info about symbol under cursor in popup" })
-            utils.keys.nnoremap("<leader>k", vim.lsp.buf.signature_help,
+            utils.keys.nnoremap("<leader>k", function()
+                    vim.lsp.buf.signature_help({ border = 'single' })
+                end,
                 { buffer = bufnr, desc = "Display signature help in popup" })
             utils.keys.nnoremap("<leader>ca", vim.lsp.buf.code_action,
                 { buffer = bufnr, desc = "Show current code actions" })
@@ -98,9 +106,9 @@ M.init = function()
                 if ok then
                     inlayhints.on_attach(client, bufnr)
                 end
-                vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
-                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-                vim.api.nvim_buf_set_option(bufnr, 'tagfunc', 'v:lua.vim.lsp.tagfunc')
+                vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
+                vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc()', { buf = bufnr })
+                vim.api.nvim_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc()', { buf = bufnr })
             end
         end,
     })

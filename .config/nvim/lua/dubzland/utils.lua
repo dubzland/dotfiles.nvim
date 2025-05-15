@@ -3,18 +3,16 @@ local api = vim.api
 local M = {}
 
 function M.reload_cargo_workspace()
-    local clients = vim.lsp.get_active_clients()
+    local clients = vim.lsp.get_clients({ name = "rust_analyzer" })
 
     for _, client in ipairs(clients) do
-        if client.name == "rust_analyzer" then
-            vim.notify("Reloading Cargo Workspace")
-            client.request("rust-analyzer/reloadWorkspace", nil, function(err)
-                if err then
-                    error(tostring(err))
-                end
-                vim.notify("Cargo workspace reloaded")
-            end, 0)
-        end
+        vim.notify("Reloading Cargo Workspace")
+        client.request("rust-analyzer/reloadWorkspace", nil, function(err)
+            if err then
+                error(tostring(err))
+            end
+            vim.notify("Cargo workspace reloaded")
+        end, 0)
     end
 end
 
@@ -24,8 +22,8 @@ end
 
 function M.has_words_before()
     unpack = unpack or table.unpack
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    local line, col = unpack(api.nvim_win_get_cursor(0))
+    return col ~= 0 and api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local K = {}

@@ -81,21 +81,13 @@ M.init = function()
 
 	vim.o.completeopt = "menuone,noinsert,noselect"
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-		border = "single",
-	})
-
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = "single",
-	})
-
 	vim.diagnostic.config({
 		-- update_in_insert = true,
 		float = {
 			focusable = false,
 			style = "minimal",
 			border = "rounded",
-			source = "always",
+			source = true,
 			header = "",
 			prefix = "",
 		},

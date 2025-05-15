@@ -11,7 +11,7 @@ return {
             'neovim/nvim-lspconfig',
             'williamboman/mason.nvim',
             'hrsh7th/cmp-nvim-lsp',
-            'folke/neodev.nvim',
+            'folke/lazydev.nvim',
         },
         config = function(_, opts)
             require("dubzland.config.mason-lspconfig").init(opts)
@@ -26,12 +26,6 @@ return {
         },
         config = function(_, opts)
             require("dubzland.config.mason-null-ls").init(opts)
-        end,
-    },
-    {
-        'lvimuser/lsp-inlayhints.nvim',
-        config = function(_, opts)
-            require("dubzland.config.lsp-inlayhints").init(opts)
         end,
     },
 }
